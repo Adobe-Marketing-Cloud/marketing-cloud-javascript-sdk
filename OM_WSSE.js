@@ -70,13 +70,13 @@ function OM_WSSE(u, s, n, c)
 
 		var p = this.encode();
 
-		rval = "X-WSSE: UsernameToken";
+		rval = "UsernameToken";
         rval += " Username=\"" + p.u + "\",";
         rval += " PasswordDigest=\"" + p.d + "\",";
         rval += " Nonce=\"" + p.n + "\",";
         rval += " Created=\"" + p.c + "\"";
 
-		return rval;
+		return { 'X-WSSE': rval };
 	};
 
 	this.generateRESTQS = function ()
