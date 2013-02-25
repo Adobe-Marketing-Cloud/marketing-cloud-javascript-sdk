@@ -22,8 +22,6 @@ Examples
             data: {},
             complete: function(data) { alert(data); }
             dataType: "text",
-            headers: {
-                'X-WSSE': headers['X-WSSE']
-            }
+            headers: headers
         });
     }
