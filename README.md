@@ -19,7 +19,7 @@ Examples
 
         $.ajax(url, {
             type:'POST',
-            data: {},
+            data: params,
             complete: function(data) { alert(data); }
             dataType: "text",
             headers: headers
