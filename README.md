@@ -10,13 +10,21 @@ $ cd marketing-cloud-javascript-sdk/
 $ open index.html
 ```
 
-This provides you with a tiny form to call the Marketing Cloud APIs.
+This provides you with a simple form to call the Marketing Cloud APIs.
+
+Usage
+-----
+
+Include the `marketing_cloud.js` and `wsse.js` to utilize the methods below
 
 Examples
 --------
 
+Call the APIs using the `MarketingCloud` object and `makeRequest` method (requires jQuery)
+
 ```javascript
 
+/* requires both wsse.js AND marketing_cloud.js */
 var username = 'YOUR_USERNAME';
 var secret   = 'YOUR_SECRET';
 var method   = 'Company.GetReportSuites'
@@ -26,4 +34,15 @@ var endpoint = 'api.omniture.com';
 MarketingCloud.makeRequest(username, secret, method, params, endpoint, function(response) {
     alert('API Response: ' + response.responseText);
 });
+```
+
+Generate the auth headers to call the APIs using the `Wsse` object and `generateAuth` method:
+
+```javascript
+/* requires wsse.js only */
+var wsse = new Wsse();
+var headers = wsse.generateAuth(username, secret);
+
+// do your own API call here
+make_api_call(headers);
 ```
