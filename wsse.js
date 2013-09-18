@@ -213,9 +213,9 @@ function binb2b64(binarray)
  *    * data = base64decode(b64);
  *     */
 
-
-var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-var base64DecodeChars = new Array(
+var Base64 = {
+  EncodeChars: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+  DecodeChars: new Array(
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
@@ -223,9 +223,10 @@ var base64DecodeChars = new Array(
     -1,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
     15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
     -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1
+  ),
 
-function base64encode(str) {
+  encode: function(str) {
     var out, i, len;
     var c1, c2, c3;
 
@@ -236,30 +237,30 @@ function base64encode(str) {
     c1 = str.charCodeAt(i++) & 0xff;
     if(i == len)
     {
-        out += base64EncodeChars.charAt(c1 >> 2);
-        out += base64EncodeChars.charAt((c1 & 0x3) << 4);
+        out += Base64.EncodeChars.charAt(c1 >> 2);
+        out += Base64.EncodeChars.charAt((c1 & 0x3) << 4);
         out += "==";
         break;
     }
     c2 = str.charCodeAt(i++);
     if(i == len)
     {
-        out += base64EncodeChars.charAt(c1 >> 2);
-        out += base64EncodeChars.charAt(((c1 & 0x3)<< 4) | ((c2 & 0xF0) >> 4));
-        out += base64EncodeChars.charAt((c2 & 0xF) << 2);
+        out += Base64.EncodeChars.charAt(c1 >> 2);
+        out += Base64.EncodeChars.charAt(((c1 & 0x3)<< 4) | ((c2 & 0xF0) >> 4));
+        out += Base64.EncodeChars.charAt((c2 & 0xF) << 2);
         out += "=";
         break;
     }
     c3 = str.charCodeAt(i++);
-    out += base64EncodeChars.charAt(c1 >> 2);
-    out += base64EncodeChars.charAt(((c1 & 0x3)<< 4) | ((c2 & 0xF0) >> 4));
-    out += base64EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >>6));
-    out += base64EncodeChars.charAt(c3 & 0x3F);
+    out += Base64.EncodeChars.charAt(c1 >> 2);
+    out += Base64.EncodeChars.charAt(((c1 & 0x3)<< 4) | ((c2 & 0xF0) >> 4));
+    out += Base64.EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >>6));
+    out += Base64.EncodeChars.charAt(c3 & 0x3F);
     }
     return out;
-}
+  },
 
-function base64decode(str) {
+  decode: function(str) {
     var c1, c2, c3, c4;
     var i, len, out;
 
@@ -269,14 +270,14 @@ function base64decode(str) {
     while(i < len) {
     /* c1 */
     do {
-        c1 = base64DecodeChars[str.charCodeAt(i++) & 0xff];
+        c1 = Base64.DecodeChars[str.charCodeAt(i++) & 0xff];
     } while(i < len && c1 == -1);
     if(c1 == -1)
         break;
 
     /* c2 */
     do {
-        c2 = base64DecodeChars[str.charCodeAt(i++) & 0xff];
+        c2 = Base64.DecodeChars[str.charCodeAt(i++) & 0xff];
     } while(i < len && c2 == -1);
     if(c2 == -1)
         break;
@@ -288,7 +289,7 @@ function base64decode(str) {
         c3 = str.charCodeAt(i++) & 0xff;
         if(c3 == 61)
         return out;
-        c3 = base64DecodeChars[c3];
+        c3 = Base64.DecodeChars[c3];
     } while(i < len && c3 == -1);
     if(c3 == -1)
         break;
@@ -300,14 +301,15 @@ function base64decode(str) {
         c4 = str.charCodeAt(i++) & 0xff;
         if(c4 == 61)
         return out;
-        c4 = base64DecodeChars[c4];
+        c4 = Base64.DecodeChars[c4];
     } while(i < len && c4 == -1);
     if(c4 == -1)
         break;
     out += String.fromCharCode(((c3 & 0x03) << 6) | c4);
     }
     return out;
-}
+  }
+};
 
 function Wsse(u, s, n, c)
 {
@@ -361,7 +363,7 @@ function Wsse(u, s, n, c)
         p.n = (this.n ? this.n : this.generateNonce());
         p.c = (this.c ? this.c : this.generateCreated());
         p.d = b64_sha1(p.n + p.c + p.s);
-        p.n = base64encode(p.n);
+        p.n = Base64.encode(p.n);
         return p;
     };
 
@@ -404,8 +406,7 @@ function Wsse(u, s, n, c)
     };
 
     /** Generate the auth credentials */
-    this.generateAuth = function (username, secret)
-    {
+    this.generateAuth = function (username, secret) {
         var nonce = this.generateNonce();
         var created = this.generateCreated();
 
