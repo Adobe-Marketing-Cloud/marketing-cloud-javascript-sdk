@@ -24,7 +24,7 @@ Call the APIs using the `MarketingCloud` object and `makeRequest` method (requir
 
 ```javascript
 
-/* requires both wsse.js AND marketing_cloud.js */
+/* requires wsse.js, marketing_cloud.js, and jQuery */
 var username = 'YOUR_USERNAME';
 var secret   = 'YOUR_SECRET';
 var method   = 'Company.GetReportSuites'
@@ -36,7 +36,7 @@ MarketingCloud.makeRequest(username, secret, method, params, endpoint, function(
 });
 ```
 
-Generate the auth headers to call the APIs using the `Wsse` object and `generateAuth` method:
+Generate the auth headers to call the APIs using the `Wsse` object and `generateAuth` method (jQuery not required):
 
 ```javascript
 /* requires wsse.js only */
