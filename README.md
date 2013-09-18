@@ -24,6 +24,6 @@ var params   = {};
 var endpoint = 'api.omniture.com';
 
 MarketingCloud.makeRequest(username, secret, method, params, endpoint, function(response) {
-    alert('API Response: '.response.responseText);
+    alert('API Response: ' + response.responseText);
 });
 ```
