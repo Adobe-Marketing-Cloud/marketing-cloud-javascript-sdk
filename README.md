@@ -1,27 +1,29 @@
-marketing-cloud-javascript-sdk
-==============================
+# Marketing Cloud Javascript SDK
 
-Frontend Library for calling the Marketing Cloud APIs
+A frontend library for calling the Marketing Cloud APIs
+
+See `index.html` for an example of calling the marketing cloud APIs using javascript.
+
+```bash
+$ git clone git@github.com:Adobe-Marketing-Cloud/marketing-cloud-javascript-sdk.git
+$ cd marketing-cloud-javascript-sdk/
+$ open index.html
+```
+
+This provides you with a tiny form to call the Marketing Cloud APIs.
 
 Examples
 --------
 
-    function makeRequest(username, secret, method, params, endpoint, callback) {
+```javascript
 
-        var wsse = new OM_WSSE();
-        var nonce = wsse.generateNonce();
-        var created = wsse.generateCreated();
+var username = 'YOUR_USERNAME';
+var secret   = 'YOUR_SECRET';
+var method   = 'Company.GetReportSuites'
+var params   = {};
+var endpoint = 'api.omniture.com';
 
-        wsse.set(username, secret, nonce, created);
-
-        var headers = wsse.generateRESTHeaders();
-        var url = 'https://'+endpoint+'/admin/1.3/rest/?method='+method;
-
-        $.ajax(url, {
-            type:'POST',
-            data: params,
-            complete: function(data) { alert(data); },
-            dataType: "text",
-            headers: headers
-        });
-    }
+MarketingCloud.makeRequest(username, secret, method, params, endpoint, function(response) {
+    alert('API Response: ' + response.responseText);
+});
+```
