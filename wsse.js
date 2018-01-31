@@ -354,7 +354,7 @@ function Wsse(u, s, n, c)
 
     this.encode = function () {
         var p = {};
-        if (!window.b64_sha1) {
+        if (typeof b64_sha1 !== "function") {
             alert("b64_sha1() was not found");
             return p;
         }
