@@ -1,0 +1,22 @@
+{
+  "name": "marketing-cloud-javascript-sdk",
+  "version": "1.0.0",
+  "description": "A frontend library for calling the Marketing Cloud APIs",
+  "main": "marketing_cloud.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://justingeeslin@github.com/justingeeslin/marketing-cloud-javascript-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justingeeslin/marketing-cloud-javascript-sdk/issues"
+  },
+  "homepage": "https://github.com/justingeeslin/marketing-cloud-javascript-sdk#readme",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
