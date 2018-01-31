@@ -418,3 +418,4 @@ function Wsse(u, s, n, c)
 
     this.set(u, s, n, c);
 }
+module.exports = Wsse;
