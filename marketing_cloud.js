@@ -1,6 +1,6 @@
 (function($) {
   var Wsse = require('./wsse.js')
-  window.MarketingCloud = {
+  var MarketingCloud = {
     env:   {},
     wsse:  new Wsse(),
 
@@ -24,3 +24,5 @@
     }
   };
 })(jQuery);
+
+module.exports = MarketingCloud;
