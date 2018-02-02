@@ -1,4 +1,4 @@
-var $ = require('jquery')
+var $ = require('jquery');
 
 (function($) {
   var Wsse = require('./wsse.js')
