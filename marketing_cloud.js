@@ -1,9 +1,9 @@
-var isNode = typeof module !== 'undefined';
+var isNode = typeof window === "undefined";
 if (isNode) {
   // Load up a virtual dom to make the Ajax calls possible.
   // In a node environment and while using a library that uses jQ's ajax require some extra things.
   var jsdom = require('jsdom');
-  // In node, lets require jQuery; in the browser lets hope jQuery is already there as it often is (circa 2018)
+  // // In node, lets require jQuery; in the browser lets hope jQuery is already there as it often is (circa 2018)
   var $ = jQuery = require('jquery')(new jsdom.JSDOM().window);
 
 }
@@ -34,7 +34,8 @@ if (isNode) {
     }
   };
 })(jQuery);
-if (isNode) {
+// In node or browserify
+if (typeof module !== "undefined") {
   module.exports = MarketingCloud;
 }
 else {
