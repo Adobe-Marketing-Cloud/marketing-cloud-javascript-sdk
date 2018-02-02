@@ -38,5 +38,10 @@ if (isNode) {
     }
   };
 })(jQuery);
-
-module.exports = MarketingCloud;
+if (isNode) {
+  module.exports = MarketingCloud;
+}
+else {
+  // In browser
+  window.MarketingCloud = MarketingCloud;
+}
