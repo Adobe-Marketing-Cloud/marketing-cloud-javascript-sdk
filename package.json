@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/justingeeslin/marketing-cloud-javascript-sdk#readme",
   "dependencies": {
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "jsdom": "^11.6.2"
   }
 }
