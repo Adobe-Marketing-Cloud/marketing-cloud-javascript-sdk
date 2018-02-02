@@ -1,6 +1,6 @@
 (function($) {
   var Wsse = require('./wsse.js')
-  var MarketingCloud = {
+  MarketingCloud = {
     env:   {},
     wsse:  new Wsse(),
 
