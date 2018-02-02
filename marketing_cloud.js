@@ -1,6 +1,7 @@
+var $ = require('jquery')
+
 (function($) {
   var Wsse = require('./wsse.js')
-  var $ = require('jquery')
   MarketingCloud = {
     env:   {},
     wsse:  new Wsse(),
