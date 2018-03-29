@@ -7,9 +7,13 @@ if (isNode) {
   var $ = jQuery = require('jquery')(new jsdom.JSDOM().window);
 
 }
+else {
+  var $ = jQuery = require('jquery')
+}
 
 (function($) {
   var Wsse = require('./wsse.js')
+
   MarketingCloud = {
     env:   {},
     wsse:  new Wsse(),
