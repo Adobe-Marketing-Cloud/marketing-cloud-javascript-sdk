@@ -418,4 +418,10 @@ function Wsse(u, s, n, c)
 
     this.set(u, s, n, c);
 }
-module.exports = Wsse;
+
+if (typeof module !== "undefined") {
+  module.exports = Wsse;
+}
+else {
+  window.Wsse = Wsse;
+}
