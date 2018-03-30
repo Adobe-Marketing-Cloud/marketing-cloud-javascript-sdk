@@ -15,7 +15,12 @@ This provides you with a simple form to call the Marketing Cloud APIs.
 Usage
 -----
 
-Include the `marketing_cloud.js` and `wsse.js` to utilize the methods below
+Include the `marketing_cloud.js` and `wsse.js` to utilize the methods below.
+
+Including using NPM/Browserify:
+```javascript
+var MarketingCloud = require('marketing-cloud-javascript-sdk')
+```
 
 Examples
 --------
