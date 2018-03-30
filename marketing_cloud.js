@@ -1,5 +1,28 @@
+// If in node/browserify,
+if (typeof require !== "undefined") {
+  var isNode = typeof window === "undefined";
+  if (isNode) {
+    // Load up a virtual dom to make the Ajax calls possible.
+    // In a node environment and while using a library that uses jQ's ajax require some extra things.
+    var jsdom = require('jsdom');
+    // // In node, lets require jQuery; in the browser lets hope jQuery is already there as it often is (circa 2018)
+    var $ = jQuery = require('jquery')(new jsdom.JSDOM().window);
+
+  }
+  else {
+    var $ = jQuery = require('jquery')
+  }
+}
+
 (function($) {
-  window.MarketingCloud = {
+  if (typeof require !== "undefined") {
+    var Wsse = require('./wsse.js')
+  }
+  else {
+    var Wsse = window.Wsse;
+  }
+  
+  MarketingCloud = {
     env:   {},
     wsse:  new Wsse(),
 
@@ -23,3 +46,11 @@
     }
   };
 })(jQuery);
+// In node or browserify
+if (typeof module !== "undefined") {
+  module.exports = MarketingCloud;
+}
+else {
+  // In browser
+  window.MarketingCloud = MarketingCloud;
+}
